@@ -6,9 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.time.Duration;
+
 public class DragAndDrop {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriver driver = new ChromeDriver();
         driver.get(FormyProject.BASE_URL + "/dragdrop");
@@ -21,7 +23,10 @@ public class DragAndDrop {
                 .build()
                 .perform();
 
-        Thread.sleep(3000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(3));
 
         driver.quit();
     }

@@ -5,9 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class CheckBoxes {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriver driver = new ChromeDriver();
         driver.get(FormyProject.BASE_URL + "/checkbox");
@@ -17,11 +19,22 @@ public class CheckBoxes {
         WebElement checkBox3 = driver.findElement(By.id("checkbox-3"));
 
         checkBox1.click();
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
+
         checkBox2.click();
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
+
         checkBox3.click();
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
 
         driver.quit();
     }

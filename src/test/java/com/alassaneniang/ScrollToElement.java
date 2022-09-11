@@ -20,7 +20,7 @@ public class ScrollToElement {
         name.sendKeys("Alassane Niang");
 
         WebElement date = driver.findElement(By.id("date"));
-        name.sendKeys("09/11/2022");
+        date.sendKeys("09/11/2022");
 
         driver.quit();
     }

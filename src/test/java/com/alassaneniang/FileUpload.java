@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class FileUpload {
 
     public static void main(String[] args) throws InterruptedException {
@@ -14,11 +16,17 @@ public class FileUpload {
 
         WebElement fileUploadField = driver.findElement(By.id("file-upload-field"));
         fileUploadField.sendKeys("file-to-upload.png");
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
 
         WebElement resetButton = driver.findElement(By.cssSelector("button[class='btn btn-warning btn-reset']"));
         resetButton.click();
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
 
         driver.quit();
     }

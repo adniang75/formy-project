@@ -6,9 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+
 public class DatePicker {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         WebDriver driver = new ChromeDriver();
         driver.get(FormyProject.BASE_URL + "/datepicker");
@@ -16,7 +18,10 @@ public class DatePicker {
         WebElement dateField = driver.findElement(By.id("datepicker"));
         dateField.sendKeys("09/11/2022");
         dateField.sendKeys(Keys.RETURN);
-        Thread.sleep(2000);
+        driver
+                .manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(2));
 
         driver.quit();
     }
