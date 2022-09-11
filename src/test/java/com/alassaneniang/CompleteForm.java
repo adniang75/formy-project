@@ -3,7 +3,6 @@ package com.alassaneniang;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +18,29 @@ public class CompleteForm {
         WebDriver driver = new ChromeDriver();
         driver.get(FormyProject.BASE_URL + "/form");
 
+        submitForm(driver);
+        waitForAlertBanner(driver);
+
+        assertEquals(
+                "The form was successfully submitted!",
+                getAlertBannerText(driver));
+
+        driver.quit();
+    }
+
+    public static String getAlertBannerText(WebDriver driver) {
+        return driver
+                .findElement(By.className("alert"))
+                .getText();
+    }
+
+    public static void waitForAlertBanner(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.className("alert")));
+    }
+
+    public static void submitForm(WebDriver driver) {
         driver
                 .findElement(By.id("first-name"))
                 .sendKeys("Alassane");
@@ -53,15 +75,6 @@ public class CompleteForm {
         driver
                 .findElement(By.cssSelector(".btn.btn-lg.btn-primary"))
                 .click();
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement alert = wait.until(
-                ExpectedConditions
-                        .visibilityOfElementLocated(By.className("alert")));
-        String alertText = alert.getText();
-        assertEquals("The form was successfully submitted!", alertText);
-
-        driver.quit();
     }
 
 }
